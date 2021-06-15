@@ -62247,7 +62247,7 @@ E.Yb.prototype={}
 F.E6.prototype={
 M:function(a,b){return new S.uR(new F.v4(null),"KinoHome",X.aio(null,C.af),null)}}
 F.v4.prototype={
-ay:function(){return new F.L3("http://95.217.202.119:51058/getNew?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
+ay:function(){return new F.L3("http://api.kinohome.xyz/getNew?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
 F.L3.prototype={
 is:function(a,b,c,d,e){var s,r
 $.nn=a
@@ -62389,8 +62389,8 @@ $S:0}
 F.zg.prototype={
 a7S:function(){var s=this.d,r=s.a.a
 $.nn=r
-if(H.acQ(r)!=null)$.adX="http://95.217.202.119:51058/getFilm?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz&id="+s.a.a
-else $.adX="http://95.217.202.119:51058/search?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz&query="+$.nn
+if(H.acQ(r)!=null)$.adX="http://api.kinohome.xyz/getFilm?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz&id="+s.a.a
+else $.adX="http://api.kinohome.xyz/search?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz&query="+$.nn
 s=this.c
 s.toString
 r=V.hG(new F.a7X(),null,t.z)
@@ -62422,7 +62422,7 @@ ay:function(){return new F.JV(C.l)}}
 F.ms.prototype={
 ay:function(){return new F.MD($.adX,C.l)}}
 F.mi.prototype={
-ay:function(){return new F.LS("http://95.217.202.119:51058/getPopular?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
+ay:function(){return new F.LS("http://api.kinohome.xyz/getPopular?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
 F.LS.prototype={
 is:function(a,b,c,d,e){var s,r
 $.nn=a
@@ -62462,7 +62462,7 @@ $0:function(){var s=this.b.b,r=this.c,q=J.aj(s)
 this.a.is(J.N(q.h(s,r),"ru_name"),J.c4(J.N(q.h(s,r),"id")),J.N(q.h(s,r),"poster"),J.N(q.h(s,r),"description"),J.N(q.h(s,r),"iframe_player"))},
 $S:0}
 F.mR.prototype={
-ay:function(){return new F.Ny("http://95.217.202.119:51058/getTop?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
+ay:function(){return new F.Ny("http://api.kinohome.xyz/getTop?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
 F.Ny.prototype={
 is:function(a,b,c,d,e){var s,r
 $.nn=a
@@ -62502,7 +62502,7 @@ $0:function(){var s=this.b.b,r=this.c,q=J.aj(s)
 this.a.is(J.N(q.h(s,r),"ru_name"),J.c4(J.N(q.h(s,r),"id")),J.N(q.h(s,r),"poster"),J.N(q.h(s,r),"description"),J.N(q.h(s,r),"iframe_player"))},
 $S:0}
 F.mk.prototype={
-ay:function(){return new F.M_("http://95.217.202.119:51058/getRandom?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
+ay:function(){return new F.M_("http://api.kinohome.xyz/getRandom?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
 F.M_.prototype={
 is:function(a,b,c,d,e){var s,r
 $.nn=a
