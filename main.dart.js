@@ -3730,9 +3730,11 @@ _.f=c
 _.r=d},
 E6:function E6(a){this.a=a},
 v4:function v4(a){this.a=a},
-L3:function L3(a){this.a=null
-this.b=a
-this.c=null},
+L3:function L3(a,b){var _=this
+_.d=a
+_.a=null
+_.b=b
+_.c=null},
 a6s:function a6s(){},
 a6z:function a6z(a){this.a=a},
 a6A:function a6A(a){this.a=a},
@@ -3778,9 +3780,11 @@ mt:function mt(a){this.a=a},
 fC:function fC(a){this.a=a},
 ms:function ms(a){this.a=a},
 mi:function mi(a){this.a=a},
-LS:function LS(a){this.a=null
-this.b=a
-this.c=null},
+LS:function LS(a,b){var _=this
+_.d=a
+_.a=null
+_.b=b
+_.c=null},
 a6Z:function a6Z(){},
 a71:function a71(a){this.a=a},
 a70:function a70(a,b){this.a=a
@@ -3789,9 +3793,11 @@ a7_:function a7_(a,b,c){this.a=a
 this.b=b
 this.c=c},
 mR:function mR(a){this.a=a},
-Ny:function Ny(a){this.a=null
-this.b=a
-this.c=null},
+Ny:function Ny(a,b){var _=this
+_.d=a
+_.a=null
+_.b=b
+_.c=null},
 a8G:function a8G(){},
 a8J:function a8J(a){this.a=a},
 a8I:function a8I(a,b){this.a=a
@@ -3800,9 +3806,11 @@ a8H:function a8H(a,b,c){this.a=a
 this.b=b
 this.c=c},
 mk:function mk(a){this.a=a},
-M_:function M_(a){this.a=null
-this.b=a
-this.c=null},
+M_:function M_(a,b){var _=this
+_.d=a
+_.a=null
+_.b=b
+_.c=null},
 a72:function a72(){},
 a75:function a75(a){this.a=a},
 a74:function a74(a,b){this.a=a
@@ -62237,9 +62245,9 @@ gaF:function(){return"windows"},
 glE:function(){return"\\"}}
 E.Yb.prototype={}
 F.E6.prototype={
-M:function(a,b){return new S.uR(new F.v4(null),"KinoPlus",X.aio(null,C.af),null)}}
+M:function(a,b){return new S.uR(new F.v4(null),"KinoHome",X.aio(null,C.af),null)}}
 F.v4.prototype={
-ay:function(){return new F.L3(C.l)}}
+ay:function(){return new F.L3("http://95.217.202.119:51058/getNew?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
 F.L3.prototype={
 is:function(a,b,c,d,e){var s,r
 $.nn=a
@@ -62248,17 +62256,17 @@ s=this.c
 s.toString
 r=V.hG(new F.a6s(),null,t.z)
 K.du(s).fk(r)},
-cv:function(){var s=0,r=P.a3(t.j),q,p
+cv:function(){var s=0,r=P.a3(t.j),q,p=this,o
 var $async$cv=P.Z(function(a,b){if(a===1)return P.a0(b,r)
 while(true)switch(s){case 0:s=3
-return P.a9(G.OX(P.jk("http://cinema.cocksuckers.fun/getNew?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz")),$async$cv)
-case 3:p=b
-q=J.N(C.aq.ce(0,B.OW(U.OM(p.e).c.a.h(0,"charset")).ce(0,p.x)),"results")
+return P.a9(G.OX(P.jk(p.d)),$async$cv)
+case 3:o=b
+q=J.N(C.aq.ce(0,B.OW(U.OM(o.e).c.a.h(0,"charset")).ce(0,o.x)),"results")
 s=1
 break
 case 1:return P.a1(q,r)}})
 return P.a2($async$cv,r)},
-M:function(a,b){var s,r,q,p,o="KinoPlus",n=null,m=M.d3(n,new T.CF(L.bB(o,n,n,n,n,n,n),n),C.q,n,n,n,n,55,n,n,n,n,n),l=L.bB("\u041d\u043e\u0432\u043e\u0435",n,n,n,n,n,n)
+M:function(a,b){var s,r,q,p,o="KinoHome",n=null,m=M.d3(n,new T.CF(L.bB(o,n,n,n,n,n,n),n),C.q,n,n,n,n,55,n,n,n,n,n),l=L.bB("\u041d\u043e\u0432\u043e\u0435",n,n,n,n,n,n)
 l=Q.k4(L.on(C.pB),new F.a6z(b),n,l,n)
 s=L.bB("\u041f\u043e\u043f\u0443\u043b\u044f\u0440\u043d\u043e\u0435",n,n,n,n,n,n)
 s=Q.k4(L.on(C.pF),new F.a6A(b),n,s,n)
@@ -62381,8 +62389,8 @@ $S:0}
 F.zg.prototype={
 a7S:function(){var s=this.d,r=s.a.a
 $.nn=r
-if(H.acQ(r)!=null)$.adX="http://cinema.cocksuckers.fun/getFilm?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz&id="+s.a.a
-else $.adX="http://cinema.cocksuckers.fun/search?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz&query="+$.nn
+if(H.acQ(r)!=null)$.adX="http://95.217.202.119:51058/getFilm?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz&id="+s.a.a
+else $.adX="http://95.217.202.119:51058/search?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz&query="+$.nn
 s=this.c
 s.toString
 r=V.hG(new F.a7X(),null,t.z)
@@ -62414,7 +62422,7 @@ ay:function(){return new F.JV(C.l)}}
 F.ms.prototype={
 ay:function(){return new F.MD($.adX,C.l)}}
 F.mi.prototype={
-ay:function(){return new F.LS(C.l)}}
+ay:function(){return new F.LS("http://95.217.202.119:51058/getPopular?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
 F.LS.prototype={
 is:function(a,b,c,d,e){var s,r
 $.nn=a
@@ -62423,12 +62431,12 @@ s=this.c
 s.toString
 r=V.hG(new F.a6Z(),null,t.z)
 K.du(s).fk(r)},
-cv:function(){var s=0,r=P.a3(t.j),q,p
+cv:function(){var s=0,r=P.a3(t.j),q,p=this,o
 var $async$cv=P.Z(function(a,b){if(a===1)return P.a0(b,r)
 while(true)switch(s){case 0:s=3
-return P.a9(G.OX(P.jk("http://cinema.cocksuckers.fun/getPopular?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz")),$async$cv)
-case 3:p=b
-q=J.N(C.aq.ce(0,B.OW(U.OM(p.e).c.a.h(0,"charset")).ce(0,p.x)),"results")
+return P.a9(G.OX(P.jk(p.d)),$async$cv)
+case 3:o=b
+q=J.N(C.aq.ce(0,B.OW(U.OM(o.e).c.a.h(0,"charset")).ce(0,o.x)),"results")
 s=1
 break
 case 1:return P.a1(q,r)}})
@@ -62454,7 +62462,7 @@ $0:function(){var s=this.b.b,r=this.c,q=J.aj(s)
 this.a.is(J.N(q.h(s,r),"ru_name"),J.c4(J.N(q.h(s,r),"id")),J.N(q.h(s,r),"poster"),J.N(q.h(s,r),"description"),J.N(q.h(s,r),"iframe_player"))},
 $S:0}
 F.mR.prototype={
-ay:function(){return new F.Ny(C.l)}}
+ay:function(){return new F.Ny("http://95.217.202.119:51058/getTop?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
 F.Ny.prototype={
 is:function(a,b,c,d,e){var s,r
 $.nn=a
@@ -62463,12 +62471,12 @@ s=this.c
 s.toString
 r=V.hG(new F.a8G(),null,t.z)
 K.du(s).fk(r)},
-cv:function(){var s=0,r=P.a3(t.j),q,p
+cv:function(){var s=0,r=P.a3(t.j),q,p=this,o
 var $async$cv=P.Z(function(a,b){if(a===1)return P.a0(b,r)
 while(true)switch(s){case 0:s=3
-return P.a9(G.OX(P.jk("http://cinema.cocksuckers.fun/getTop?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz")),$async$cv)
-case 3:p=b
-q=J.N(C.aq.ce(0,B.OW(U.OM(p.e).c.a.h(0,"charset")).ce(0,p.x)),"results")
+return P.a9(G.OX(P.jk(p.d)),$async$cv)
+case 3:o=b
+q=J.N(C.aq.ce(0,B.OW(U.OM(o.e).c.a.h(0,"charset")).ce(0,o.x)),"results")
 s=1
 break
 case 1:return P.a1(q,r)}})
@@ -62494,7 +62502,7 @@ $0:function(){var s=this.b.b,r=this.c,q=J.aj(s)
 this.a.is(J.N(q.h(s,r),"ru_name"),J.c4(J.N(q.h(s,r),"id")),J.N(q.h(s,r),"poster"),J.N(q.h(s,r),"description"),J.N(q.h(s,r),"iframe_player"))},
 $S:0}
 F.mk.prototype={
-ay:function(){return new F.M_(C.l)}}
+ay:function(){return new F.M_("http://95.217.202.119:51058/getRandom?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
 F.M_.prototype={
 is:function(a,b,c,d,e){var s,r
 $.nn=a
@@ -62503,12 +62511,12 @@ s=this.c
 s.toString
 r=V.hG(new F.a72(),null,t.z)
 K.du(s).fk(r)},
-cv:function(){var s=0,r=P.a3(t.j),q,p
+cv:function(){var s=0,r=P.a3(t.j),q,p=this,o
 var $async$cv=P.Z(function(a,b){if(a===1)return P.a0(b,r)
 while(true)switch(s){case 0:s=3
-return P.a9(G.OX(P.jk("http://cinema.cocksuckers.fun/getRandom?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz")),$async$cv)
-case 3:p=b
-q=J.N(C.aq.ce(0,B.OW(U.OM(p.e).c.a.h(0,"charset")).ce(0,p.x)),"results")
+return P.a9(G.OX(P.jk(p.d)),$async$cv)
+case 3:o=b
+q=J.N(C.aq.ce(0,B.OW(U.OM(o.e).c.a.h(0,"charset")).ce(0,o.x)),"results")
 s=1
 break
 case 1:return P.a1(q,r)}})
