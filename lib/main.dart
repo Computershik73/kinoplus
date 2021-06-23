@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'dart:html';
-import 'package:sp_util/sp_util.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -23,7 +22,6 @@ void main() async {
     //Navigation bar divider color
     systemNavigationBarIconBrightness: Brightness.light, //navigation bar icon
   ));
-  await SpUtil.getInstance();
   runApp(MyApp());
 }
 
@@ -263,38 +261,30 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class _FilmRouteState extends State<FilmRoute> {
+
   void initState() {
     super.initState();
-    // ignore: undefined_prefixed_name
-    ui.platformViewRegistry.registerViewFactory(
-        'hello-world-html',
-        (int viewId) => IFrameElement()
-          ..width = '640'
-          ..height = '360'
-          ..allowFullscreen = true
-          ..src = "//hdrise.com/video/60425/0b7dbaeb803a81ee2bba60177074b1b3/720p"
-          ..style.border = 'none');
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+    ]);
+    SystemChrome.setEnabledSystemUIOverlays([]);
+  }
+
+  void deactivate() {
+    super.deactivate();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+    SystemChrome.setEnabledSystemUIOverlays(
+        [SystemUiOverlay.top, SystemUiOverlay.bottom]);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        brightness: Brightness.light,
-        iconTheme: IconThemeData(
-          color: Colors.blue, //change your color here
-        ),
-        title: Text(g.title, style: TextStyle(color: Colors.blue)),
-      ),
-      body: Center(
-        child:
-          Container(
-              width: 640,
-              height: 360,
-              margin: EdgeInsets.only(left: 20, right: 20),
-              child: HtmlElementView(viewType: 'hello-world-html')),
+      body: WebView(
+        initialUrl: g.player,
+        javascriptMode: JavascriptMode.unrestricted,
       ),
     );
   }
