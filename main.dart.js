@@ -62265,7 +62265,7 @@ E.Ya.prototype={}
 F.E6.prototype={
 M:function(a,b){return new S.uS(new F.v5(null),"KinoHome",X.ais(null,C.af),null)}}
 F.v5.prototype={
-ay:function(){return new F.L2("https://api.kinohome.xyz/getNew?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
+ay:function(){return new F.L2("https://cinema.ulbwa.xyz/getNew?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
 F.L2.prototype={
 is:function(a,b,c,d,e){var s,r
 $.np=a
@@ -62405,8 +62405,8 @@ $S:0}
 F.zh.prototype={
 a7S:function(){var s=this.d,r=s.a.a
 $.np=r
-if(H.acT(r)!=null)$.ae_="https://api.kinohome.xyz/getFilm?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz&id="+s.a.a
-else $.ae_="https://api.kinohome.xyz/search?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz&query="+$.np
+if(H.acT(r)!=null)$.ae_="https://cinema.ulbwa.xyz/getFilm?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz&id="+s.a.a
+else $.ae_="https://cinema.ulbwa.xyz/search?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz&query="+$.np
 s=this.c
 s.toString
 r=V.hG(new F.a8_(),null,t.z)
@@ -62444,7 +62444,7 @@ ay:function(){return new F.JU(C.l)}}
 F.mu.prototype={
 ay:function(){return new F.MC($.ae_,C.l)}}
 F.mk.prototype={
-ay:function(){return new F.LR("https://api.kinohome.xyz/getPopular?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
+ay:function(){return new F.LR("https://cinema.ulbwa.xyz/getPopular?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
 F.LR.prototype={
 is:function(a,b,c,d,e){var s,r
 $.np=a
@@ -62483,7 +62483,7 @@ $0:function(){var s=this.b.b,r=this.c,q=J.aj(s)
 this.a.is(J.N(q.h(s,r),"ru_name"),J.c4(J.N(q.h(s,r),"id")),J.N(q.h(s,r),"poster"),J.N(q.h(s,r),"description"),J.N(q.h(s,r),"iframe_player"))},
 $S:0}
 F.mT.prototype={
-ay:function(){return new F.Nx("https://api.kinohome.xyz/getTop?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
+ay:function(){return new F.Nx("https://cinema.ulbwa.xyz/getTop?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
 F.Nx.prototype={
 is:function(a,b,c,d,e){var s,r
 $.np=a
@@ -62522,7 +62522,7 @@ $0:function(){var s=this.b.b,r=this.c,q=J.aj(s)
 this.a.is(J.N(q.h(s,r),"ru_name"),J.c4(J.N(q.h(s,r),"id")),J.N(q.h(s,r),"poster"),J.N(q.h(s,r),"description"),J.N(q.h(s,r),"iframe_player"))},
 $S:0}
 F.mm.prototype={
-ay:function(){return new F.LZ("https://api.kinohome.xyz/getRandom?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
+ay:function(){return new F.LZ("https://cinema.ulbwa.xyz/getRandom?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz",C.l)}}
 F.LZ.prototype={
 is:function(a,b,c,d,e){var s,r
 $.np=a
