@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:html';
-import 'package:sp_util/sp_util.dart';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -23,7 +22,6 @@ void main() async {
     //Navigation bar divider color
     systemNavigationBarIconBrightness: Brightness.light, //navigation bar icon
   ));
-  await SpUtil.getInstance();
   runApp(MyApp());
 }
 

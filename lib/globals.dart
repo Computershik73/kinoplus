@@ -8,4 +8,4 @@ String desc = "";
 String author = "";
 String posterUrl = "";
 String apiUrl = "";
-String baseUrl = "http://api.kinohome.xyz";
+String baseUrl = "https://api.kinohome.xyz";
