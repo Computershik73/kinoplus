@@ -1,0 +1,13 @@
+ {
+    "version": "1.6",
+    "changelog": "What's new?
+- fixed biometrics (ie face unlock etc)
+- showing ID in self profile
+- improved system fonts
+- not showing time on stickers anymore
+- fixed bugs with themes 
+- better amoled theme
+- monet theming! available for light, dark and amoled thems. to activate select last accent in the themes menu (android 12 only)
+- added back donate menu with different variants
+- something else i guess......?"
+  }
