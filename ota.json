@@ -1,5 +1,5 @@
   {
-    "version": "3.8.4",
+    "version": "1.8",
     "changelog": "What's new?
 - fixed biometrics (ie face unlock etc)
 - showing ID in self profile
