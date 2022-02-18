@@ -1,13 +1,8 @@
   {
-    "version": "1.8",
-    "changelog": "What's new?
-- fixed biometrics (ie face unlock etc)
-- showing ID in self profile
-- improved system fonts
-- not showing time on stickers anymore
-- fixed bugs with themes 
-- better amoled theme
-- monet theming! available for light, dark and amoled thems. to activate select last accent in the themes menu (android 12 only)
-- added back donate menu with different variants
-- something else i guess......?"
+    "version": "1.9",
+    "changelog": "- исправлены кнопки навигации при просмотре фильма
+- добавлена возможность анонимного входа для пользователей без Google сервисов
+- при переустановке/первом логине приложения, если у вас есть Premium, то он будет активирован сразу
+- теперь с блокировщиком рекламы и без премиума вы можете ознакомиться с приложением, но смотреть фильмы все также нельзя
+- исправление ошибок, прочие улучшения"
   }
