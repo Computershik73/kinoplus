@@ -8,9 +8,9 @@ body {margin: 0;}
   <body>
           <div id="i"></div>
             <script>
-                var url = location.href.match(/\?(.+)/)[1];
-                var url1 = url.match(/\,(.+)/)[0];
-                var url2 = url.match(/\,(.+)/)[1];
+                var url = location.href.split("?");
+                var url1 = url[1];
+                var url2 = url[2];
                 console.log(url1);
                 console.log(url2);
                 var newDiv = document.createElement("div");
