@@ -63520,7 +63520,7 @@ $S:0}
 A.Ar.prototype={
 a7O(){var s,r,q=$.ti=this.d.a.a
 if(B.b.u(q,"kinopoisk")){s=B.b.u(q,"http")?4:2
-$.afB=B.b.T("http://95.217.202.119:51058/getFilm?api_token=Q2srILqHm5IJUKcfiTh5TURHgy5WJkA9&id=",q.split("/")[s])}else $.afB="http://95.217.202.119:51058/search?api_token=Q2srILqHm5IJUKcfiTh5TURHgy5WJkA9&query="+q
+$.afB=B.b.T("https://films.rstudio.world/getFilm?api_token=Q2srILqHm5IJUKcfiTh5TURHgy5WJkA9&id=",q.split("/")[s])}else $.afB="https://films.rstudio.world/search?api_token=Q2srILqHm5IJUKcfiTh5TURHgy5WJkA9&query="+q
 q=this.c
 q.toString
 r=A.id(new A.a9A(),null,t.z)
@@ -63632,7 +63632,7 @@ $0(){var s=this.b.b,r=this.c,q=J.a9(s)
 this.a.iv(J.L(q.h(s,r),"ru_name"),J.c1(J.L(q.h(s,r),"id")),J.L(q.h(s,r),"poster"),J.L(q.h(s,r),"description"),J.L(q.h(s,r),"iframe_player"))},
 $S:0}
 A.mV.prototype={
-av(){return new A.Nm("http://95.217.202.119:51058/getRandom?api_token=Q2srILqHm5IJUKcfiTh5TURHgy5WJkA9",B.k)}}
+av(){return new A.Nm("https://films.rstudio.world/getRandom?api_token=Q2srILqHm5IJUKcfiTh5TURHgy5WJkA9",B.k)}}
 A.Nm.prototype={
 iv(a,b,c,d,e){var s,r
 $.ti=a
