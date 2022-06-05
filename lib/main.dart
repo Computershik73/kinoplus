@@ -1,27 +1,14 @@
 import 'dart:convert';
-import 'dart:html';
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import 'globals.dart' as g;
 
 void main() async {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.white,
-    // navigation bar color
-    statusBarColor: Colors.white,
-    // status bar color
-    statusBarBrightness: Brightness.dark,
-    //status bar brigtness
-    statusBarIconBrightness: Brightness.dark,
-    //status barIcon Brightness
-    systemNavigationBarDividerColor: Colors.white,
-    //Navigation bar divider color
-    systemNavigationBarIconBrightness: Brightness.light, //navigation bar icon
-  ));
   runApp(MyApp());
 }
 
@@ -67,16 +54,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final String apiUrl =
-      g.baseUrl + "/getNew?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz";
+  final String apiUrl = "https://kinohome.xyz/neww.json";
 
   void _pushShit(
       String title, String id, String posterUrl, String desc, String player) {
     g.title = title;
     g.id = id;
-    g.posterUrl = posterUrl;
-    g.desc = desc;
-    g.player = player;
 
     Navigator.push(
       context,
@@ -94,11 +77,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   String _location(dynamic user) {
-    return user['genres'][0];
-  }
-
-  String _age(Map<dynamic, dynamic> user) {
-    return user['ratings']['kinopoisk']['rating'].toString() + " ★";
+    String a = user['countries'][0] + ", " + user['genres'][0];
+    if (user['genres'].length + 1 > 2) {
+      a += ", " + user['genres'][1];
+    }
+    a += "\n" + user['ratings']['kinopoisk']['rating'].toString() + " KP";
+    if (user['duration'] != 0) {
+      a += ", " + (user['duration']/60).toString() + " мин";
+    }
+    return a;
   }
 
   String _id(dynamic user) {
@@ -115,6 +102,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String _player(dynamic user) {
     return user['iframe_player'];
+  }
+
+  void _launchURL() async {
+    if (!await launch("https://t.me/kinohome_xyz")) throw 'Could not launch';
+  }
+
+  void _launchURL2() async {
+    if (!await launch("https://new.donatepay.ru/@ctwoon"))
+      throw 'Could not launch';
   }
 
   @override
@@ -190,6 +186,28 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
             ),
+            ListTile(
+              title: Text('Telegram'),
+              leading: Icon(Icons.telegram_outlined),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+                _launchURL();
+              },
+            ),
+            ListTile(
+              title: Text('Поддержать проект'),
+              leading: Icon(Icons.money),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+                _launchURL2();
+              },
+            ),
           ],
         ),
       ),
@@ -211,9 +229,9 @@ class _MyHomePageState extends State<MyHomePage> {
               )),
         ],
         backgroundColor: Colors.white,
-        brightness: Brightness.light,
         centerTitle: true,
         title: Text("KinoHome", style: TextStyle(color: Colors.blue)),
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: Container(
         child: FutureBuilder<List<dynamic>>(
@@ -233,22 +251,41 @@ class _MyHomePageState extends State<MyHomePage> {
                             _desc(snapshot.data[index]),
                             _player(snapshot.data[index]));
                       },
-                      child: Card(
-                        child: Column(
-                          children: <Widget>[
-                            ListTile(
-                              leading: CircleAvatar(
-                                  radius: 30,
-                                  backgroundImage: NetworkImage(
-                                      snapshot.data[index]['poster_small'])),
-                              title: Text(_name(snapshot.data[index])),
-                              subtitle: Text(_location(snapshot.data[index])),
-                              trailing: Text(_age(snapshot.data[index])),
-                            )
-                          ],
+                      child: Container(
+                        height: 230,
+                        child: Card(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 8, bottom:0, left:16, right:0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.network(
+                                        snapshot.data[index]['poster'],
+                                        height: 200,
+                                        width: 150,
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width * 0.5,
+                                    height: 200,
+                                    child: ListTile(
+                                      title: Text(_name(snapshot.data[index])),
+                                      subtitle: Text(_location(snapshot.data[index])),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
+                      )
+                      );
                   });
             } else {
               return Center(child: CircularProgressIndicator());
@@ -260,18 +297,27 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+class Album {
+  final String url;
+
+  Album({
+    required this.url,
+  });
+
+  factory Album.fromJson(Map<String, dynamic> json) {
+    return Album(
+      url: json['iframe_url'],
+    );
+  }
+}
+
 class _FilmRouteState extends State<FilmRoute> {
-  void initState() {
-    super.initState();
-    // ignore: undefined_prefixed_name
-    ui.platformViewRegistry.registerViewFactory(
-        'hello-world-html',
-        (int viewId) => IFrameElement()
-          ..width = '640'
-          ..height = '360'
-          ..allowFullscreen = true
-          ..src = "//hdrise.com/video/60425/0b7dbaeb803a81ee2bba60177074b1b3/720p"
-          ..style.border = 'none');
+  Future<Album> fetchUsers() async {
+    var result = await http.get(Uri.parse(
+        "https://api1638534874.bhcesh.me/franchise/details?token=ec398001bf064694fb758a3ceeaf7c57&kinopoisk_id=" +
+            g.id));
+    print(json.decode(result.body)['iframe_url'] + "?host=kinohome.xyz");
+    return Album.fromJson(json.decode(result.body));
   }
 
   @override
@@ -280,19 +326,26 @@ class _FilmRouteState extends State<FilmRoute> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        brightness: Brightness.light,
         iconTheme: IconThemeData(
           color: Colors.blue, //change your color here
         ),
-        title: Text(g.title, style: TextStyle(color: Colors.blue)),
+        title: Text(g.title, style: TextStyle(color: Colors.blue)), systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
-      body: Center(
-        child:
-          Container(
-              width: 640,
-              height: 360,
-              margin: EdgeInsets.only(left: 20, right: 20),
-              child: HtmlElementView(viewType: 'hello-world-html')),
+      body: Container(
+        child: FutureBuilder<Album>(
+          future: fetchUsers(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return Center(
+                child: WebView(
+                initialUrl: snapshot.data.url + "?host=kinohome.xyz",
+                ),
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
       ),
     );
   }
@@ -305,9 +358,6 @@ class _SearchResultRouteState extends State<SearchResultRoute> {
       String title, String id, String posterUrl, String desc, String player) {
     g.title = title;
     g.id = id;
-    g.posterUrl = posterUrl;
-    g.desc = desc;
-    g.player = player;
 
     Navigator.push(
       context,
@@ -325,11 +375,19 @@ class _SearchResultRouteState extends State<SearchResultRoute> {
   }
 
   String _location(dynamic user) {
-    return user['genres'][0];
+    String a = user['countries'][0] + ", " + user['genres'][0];
+    if (user['genres'].length + 1 > 2) {
+      a += ", " + user['genres'][1];
+    }
+    a += "\n" + user['ratings']['kinopoisk']['rating'].toString() + " KP";
+    if (user['duration'] != 0) {
+      a += ", " + (user['duration']/60).toString() + " мин";
+    }
+    return a;
   }
 
   String _age(Map<dynamic, dynamic> user) {
-    return user['ratings']['kinopoisk']['rating'].toString() + " ★";
+    return user['ratings']['kinopoisk']['rating'].toString() + " KP";
   }
 
   String _id(dynamic user) {
@@ -363,8 +421,8 @@ class _SearchResultRouteState extends State<SearchResultRoute> {
           color: Colors.blue, //change your color here
         ),
         backgroundColor: Colors.white,
-        brightness: Brightness.light,
         title: Text("Результаты поиска", style: TextStyle(color: Colors.blue)),
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: Container(
         child: FutureBuilder<List<dynamic>>(
@@ -376,29 +434,48 @@ class _SearchResultRouteState extends State<SearchResultRoute> {
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
-                      onTap: () {
-                        _pushShit(
-                            _name(snapshot.data[index]),
-                            _id(snapshot.data[index]),
-                            _poster(snapshot.data[index]),
-                            _desc(snapshot.data[index]),
-                            _player(snapshot.data[index]));
-                      },
-                      child: Card(
-                        child: Column(
-                          children: <Widget>[
-                            ListTile(
-                              leading: CircleAvatar(
-                                  radius: 30,
-                                  backgroundImage: NetworkImage(
-                                      snapshot.data[index]['poster_small'])),
-                              title: Text(_name(snapshot.data[index])),
-                              subtitle: Text(_location(snapshot.data[index])),
-                              trailing: Text(_age(snapshot.data[index])),
-                            )
-                          ],
-                        ),
-                      ),
+                        onTap: () {
+                          _pushShit(
+                              _name(snapshot.data[index]),
+                              _id(snapshot.data[index]),
+                              _poster(snapshot.data[index]),
+                              _desc(snapshot.data[index]),
+                              _player(snapshot.data[index]));
+                        },
+                        child: Container(
+                          height: 230,
+                          child: Card(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 8, bottom:0, left:16, right:0),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(8.0),
+                                        child: Image.network(
+                                          snapshot.data[index]['poster'],
+                                          height: 200,
+                                          width: 150,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width * 0.5,
+                                      height: 200,
+                                      child: ListTile(
+                                        title: Text(_name(snapshot.data[index])),
+                                        subtitle: Text(_location(snapshot.data[index])),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
                     );
                   });
             } else {
@@ -416,13 +493,19 @@ class _SearchRouteState extends State<SearchRoute> {
 
   void lessGo() {
     g.title = txt.text;
-    if (double.tryParse(txt.text) != null) {
+    if (txt.text.contains("kinopoisk")) {
+      var a = 0;
+      if (txt.text.contains("http")) {
+        a = 4;
+      } else {
+        a = 2;
+      }
       g.apiUrl = g.baseUrl +
-          "/getFilm?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz&id=" +
-          txt.text;
+          "/getFilm?api_token=Q2srILqHm5IJUKcfiTh5TURHgy5WJkA9&id=" +
+          txt.text.split("/")[a];
     } else {
       g.apiUrl = g.baseUrl +
-          "/search?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz&query=" +
+          "/search?api_token=Q2srILqHm5IJUKcfiTh5TURHgy5WJkA9&query=" +
           g.title;
     }
     Navigator.push(
@@ -483,7 +566,7 @@ class _SearchRouteState extends State<SearchRoute> {
                       icon: Icon(Icons.clear),
                     ),
                     border: OutlineInputBorder(),
-                    labelText: "Название или ID Кинопоиск",
+                    labelText: "Название или ссылка на Кинопоиск",
                     labelStyle: TextStyle(fontSize: 15)),
               ),
             ),
@@ -536,16 +619,12 @@ class PopularRoute extends StatefulWidget {
 }
 
 class _PopularRouteState extends State<PopularRoute> {
-  final String apiUrl =
-      g.baseUrl + "/getPopular?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz";
+  final String apiUrl = "https://kinohome.xyz/noww.json";
 
   void _pushShit(
       String title, String id, String posterUrl, String desc, String player) {
     g.title = title;
     g.id = id;
-    g.posterUrl = posterUrl;
-    g.desc = desc;
-    g.player = player;
 
     Navigator.push(
       context,
@@ -563,11 +642,19 @@ class _PopularRouteState extends State<PopularRoute> {
   }
 
   String _location(dynamic user) {
-    return user['genres'][0];
+    String a = user['countries'][0] + ", " + user['genres'][0];
+    if (user['genres'].length + 1 > 2) {
+      a += ", " + user['genres'][1];
+    }
+    a += "\n" + user['ratings']['kinopoisk']['rating'].toString() + " KP";
+    if (user['duration'] != 0) {
+      a += ", " + (user['duration']/60).toString() + " мин";
+    }
+    return a;
   }
 
   String _age(Map<dynamic, dynamic> user) {
-    return user['ratings']['kinopoisk']['rating'].toString() + " ★";
+    return user['ratings']['kinopoisk']['rating'].toString() + " KP";
   }
 
   String _id(dynamic user) {
@@ -614,29 +701,48 @@ class _PopularRouteState extends State<PopularRoute> {
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
-                      onTap: () {
-                        _pushShit(
-                            _name(snapshot.data[index]),
-                            _id(snapshot.data[index]),
-                            _poster(snapshot.data[index]),
-                            _desc(snapshot.data[index]),
-                            _player(snapshot.data[index]));
-                      },
-                      child: Card(
-                        child: Column(
-                          children: <Widget>[
-                            ListTile(
-                              leading: CircleAvatar(
-                                  radius: 30,
-                                  backgroundImage: NetworkImage(
-                                      snapshot.data[index]['poster_small'])),
-                              title: Text(_name(snapshot.data[index])),
-                              subtitle: Text(_location(snapshot.data[index])),
-                              trailing: Text(_age(snapshot.data[index])),
-                            )
-                          ],
-                        ),
-                      ),
+                        onTap: () {
+                          _pushShit(
+                              _name(snapshot.data[index]),
+                              _id(snapshot.data[index]),
+                              _poster(snapshot.data[index]),
+                              _desc(snapshot.data[index]),
+                              _player(snapshot.data[index]));
+                        },
+                        child: Container(
+                          height: 230,
+                          child: Card(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 8, bottom:0, left:16, right:0),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(8.0),
+                                        child: Image.network(
+                                          snapshot.data[index]['poster'],
+                                          height: 200,
+                                          width: 150,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width * 0.5,
+                                      height: 200,
+                                      child: ListTile(
+                                        title: Text(_name(snapshot.data[index])),
+                                        subtitle: Text(_location(snapshot.data[index])),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
                     );
                   });
             } else {
@@ -654,16 +760,12 @@ class TopRoute extends StatefulWidget {
 }
 
 class _TopRouteState extends State<TopRoute> {
-  final String apiUrl =
-      g.baseUrl + "/getTop?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz";
+  final String apiUrl = "https://kinohome.xyz/bestt.json";
 
   void _pushShit(
       String title, String id, String posterUrl, String desc, String player) {
     g.title = title;
     g.id = id;
-    g.posterUrl = posterUrl;
-    g.desc = desc;
-    g.player = player;
 
     Navigator.push(
       context,
@@ -681,11 +783,19 @@ class _TopRouteState extends State<TopRoute> {
   }
 
   String _location(dynamic user) {
-    return user['genres'][0];
+    String a = user['countries'][0] + ", " + user['genres'][0];
+    if (user['genres'].length + 1 > 2) {
+      a += ", " + user['genres'][1];
+    }
+    a += "\n" + user['ratings']['kinopoisk']['rating'].toString() + " KP";
+    if (user['duration'] != 0) {
+      a += ", " + (user['duration']/60).toString() + " мин";
+    }
+    return a;
   }
 
   String _age(Map<dynamic, dynamic> user) {
-    return user['ratings']['kinopoisk']['rating'].toString() + " ★";
+    return user['ratings']['kinopoisk']['rating'].toString() + " KP";
   }
 
   String _id(dynamic user) {
@@ -732,29 +842,48 @@ class _TopRouteState extends State<TopRoute> {
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
-                      onTap: () {
-                        _pushShit(
-                            _name(snapshot.data[index]),
-                            _id(snapshot.data[index]),
-                            _poster(snapshot.data[index]),
-                            _desc(snapshot.data[index]),
-                            _player(snapshot.data[index]));
-                      },
-                      child: Card(
-                        child: Column(
-                          children: <Widget>[
-                            ListTile(
-                              leading: CircleAvatar(
-                                  radius: 30,
-                                  backgroundImage: NetworkImage(
-                                      snapshot.data[index]['poster_small'])),
-                              title: Text(_name(snapshot.data[index])),
-                              subtitle: Text(_location(snapshot.data[index])),
-                              trailing: Text(_age(snapshot.data[index])),
-                            )
-                          ],
-                        ),
-                      ),
+                        onTap: () {
+                          _pushShit(
+                              _name(snapshot.data[index]),
+                              _id(snapshot.data[index]),
+                              _poster(snapshot.data[index]),
+                              _desc(snapshot.data[index]),
+                              _player(snapshot.data[index]));
+                        },
+                        child: Container(
+                          height: 230,
+                          child: Card(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 8, bottom:0, left:16, right:0),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(8.0),
+                                        child: Image.network(
+                                          snapshot.data[index]['poster'],
+                                          height: 200,
+                                          width: 150,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width * 0.5,
+                                      height: 200,
+                                      child: ListTile(
+                                        title: Text(_name(snapshot.data[index])),
+                                        subtitle: Text(_location(snapshot.data[index])),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
                     );
                   });
             } else {
@@ -773,15 +902,12 @@ class RandomRoute extends StatefulWidget {
 
 class _RandomRouteState extends State<RandomRoute> {
   final String apiUrl =
-      g.baseUrl + "/getRandom?api_token=LvIszl08uL7JMVAXpZvvOILsAFmFW2Jz";
+      g.baseUrl + "/getRandom?api_token=Q2srILqHm5IJUKcfiTh5TURHgy5WJkA9";
 
   void _pushShit(
       String title, String id, String posterUrl, String desc, String player) {
     g.title = title;
     g.id = id;
-    g.posterUrl = posterUrl;
-    g.desc = desc;
-    g.player = player;
 
     Navigator.push(
       context,
@@ -799,11 +925,19 @@ class _RandomRouteState extends State<RandomRoute> {
   }
 
   String _location(dynamic user) {
-    return user['genres'][0];
+    String a = user['countries'][0] + ", " + user['genres'][0];
+    if (user['genres'].length + 1 > 2) {
+      a += ", " + user['genres'][1];
+    }
+    a += "\n" + user['ratings']['kinopoisk']['rating'].toString() + " KP";
+    if (user['duration'] != 0) {
+      a += ", " + (user['duration']/60).toString() + " мин";
+    }
+    return a;
   }
 
   String _age(Map<dynamic, dynamic> user) {
-    return user['ratings']['kinopoisk']['rating'].toString() + " ★";
+    return user['ratings']['kinopoisk']['rating'].toString() + " KP";
   }
 
   String _id(dynamic user) {
@@ -850,29 +984,48 @@ class _RandomRouteState extends State<RandomRoute> {
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
-                      onTap: () {
-                        _pushShit(
-                            _name(snapshot.data[index]),
-                            _id(snapshot.data[index]),
-                            _poster(snapshot.data[index]),
-                            _desc(snapshot.data[index]),
-                            _player(snapshot.data[index]));
-                      },
-                      child: Card(
-                        child: Column(
-                          children: <Widget>[
-                            ListTile(
-                              leading: CircleAvatar(
-                                  radius: 30,
-                                  backgroundImage: NetworkImage(
-                                      snapshot.data[index]['poster_small'])),
-                              title: Text(_name(snapshot.data[index])),
-                              subtitle: Text(_location(snapshot.data[index])),
-                              trailing: Text(_age(snapshot.data[index])),
-                            )
-                          ],
-                        ),
-                      ),
+                        onTap: () {
+                          _pushShit(
+                              _name(snapshot.data[index]),
+                              _id(snapshot.data[index]),
+                              _poster(snapshot.data[index]),
+                              _desc(snapshot.data[index]),
+                              _player(snapshot.data[index]));
+                        },
+                        child: Container(
+                          height: 230,
+                          child: Card(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 8, bottom:0, left:16, right:0),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(8.0),
+                                        child: Image.network(
+                                          snapshot.data[index]['poster'],
+                                          height: 200,
+                                          width: 150,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width * 0.5,
+                                      height: 200,
+                                      child: ListTile(
+                                        title: Text(_name(snapshot.data[index])),
+                                        subtitle: Text(_location(snapshot.data[index])),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
                     );
                   });
             } else {
