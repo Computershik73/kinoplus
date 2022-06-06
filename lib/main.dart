@@ -386,6 +386,9 @@ class _SearchResultRouteState extends State<SearchResultRoute> {
     return a;
   }
 
+  String _age(Map<dynamic, dynamic> user) {
+    return user['ratings']['kinopoisk']['rating'].toString() + " KP";
+  }
 
   String _id(dynamic user) {
     return user['id'].toString();
@@ -517,10 +520,11 @@ class _SearchRouteState extends State<SearchRoute> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.white,
+        brightness: Brightness.light,
         iconTheme: IconThemeData(
           color: Colors.blue, //change your color here
         ),
-        title: Text("Поиск", style: TextStyle(color: Colors.blue)), systemOverlayStyle: SystemUiOverlayStyle.dark,
+        title: Text("Поиск", style: TextStyle(color: Colors.blue)),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -649,6 +653,10 @@ class _PopularRouteState extends State<PopularRoute> {
     return a;
   }
 
+  String _age(Map<dynamic, dynamic> user) {
+    return user['ratings']['kinopoisk']['rating'].toString() + " KP";
+  }
+
   String _id(dynamic user) {
     return user['id'].toString();
   }
@@ -680,7 +688,8 @@ class _PopularRouteState extends State<PopularRoute> {
           color: Colors.blue, //change your color here
         ),
         backgroundColor: Colors.white,
-        title: Text("Популярное", style: TextStyle(color: Colors.blue)), systemOverlayStyle: SystemUiOverlayStyle.dark,
+        brightness: Brightness.light,
+        title: Text("Популярное", style: TextStyle(color: Colors.blue)),
       ),
       body: Container(
         child: FutureBuilder<List<dynamic>>(
@@ -785,6 +794,9 @@ class _TopRouteState extends State<TopRoute> {
     return a;
   }
 
+  String _age(Map<dynamic, dynamic> user) {
+    return user['ratings']['kinopoisk']['rating'].toString() + " KP";
+  }
 
   String _id(dynamic user) {
     return user['id'].toString();
@@ -817,7 +829,8 @@ class _TopRouteState extends State<TopRoute> {
           color: Colors.blue, //change your color here
         ),
         backgroundColor: Colors.white,
-        title: Text("Лучшее", style: TextStyle(color: Colors.blue)), systemOverlayStyle: SystemUiOverlayStyle.dark,
+        brightness: Brightness.light,
+        title: Text("Лучшее", style: TextStyle(color: Colors.blue)),
       ),
       body: Container(
         child: FutureBuilder<List<dynamic>>(
@@ -923,6 +936,10 @@ class _RandomRouteState extends State<RandomRoute> {
     return a;
   }
 
+  String _age(Map<dynamic, dynamic> user) {
+    return user['ratings']['kinopoisk']['rating'].toString() + " KP";
+  }
+
   String _id(dynamic user) {
     return user['id'].toString();
   }
@@ -954,7 +971,8 @@ class _RandomRouteState extends State<RandomRoute> {
           color: Colors.blue, //change your color here
         ),
         backgroundColor: Colors.white,
-        title: Text("Случайное", style: TextStyle(color: Colors.blue)), systemOverlayStyle: SystemUiOverlayStyle.dark,
+        brightness: Brightness.light,
+        title: Text("Случайное", style: TextStyle(color: Colors.blue)),
       ),
       body: Container(
         child: FutureBuilder<List<dynamic>>(
