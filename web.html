@@ -14,7 +14,7 @@ body {margin: 0;}
             <script>
                 var url = location.href.split(".html?")[1];
                 var newDiv = document.createElement("div");
-                newDiv.innerHTML = '<video-js controls id="my-video" class="video-js"></video-js>';
+                newDiv.innerHTML = '<video-js controls id="my-video" class="video-js style="border: 0; width: 100%; height: 100%"></video-js>';
                 my_div = document.getElementById("i");
                 document.body.insertBefore(newDiv, my_div);
                 const player = videojs('my-video', {});
