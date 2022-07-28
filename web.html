@@ -19,7 +19,7 @@ body {margin: 0;}
                 document.body.insertBefore(newDiv, my_div);
                 const player = videojs('my-video', {});
                 var type = "video/mp4";
-                if (location.href.includes(".m3u8)) {
+                if (location.href.includes(".m3u8")) {
                    type = "application/x-mpegURL";
                 }
                 player.src({
